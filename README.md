@@ -1,1 +1,1 @@
-Link to front end : https://github.com/shuhad97/ThoughtsBlog-backend
+Link to front end : https://github.com/shuhad97/ThoughtsBlog-frontend
