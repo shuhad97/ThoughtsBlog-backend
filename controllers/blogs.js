@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken')
 
 
 blogsRouter.get('/',  async (request, response) => {
-    console.log('here')
     await Blog
       .find({}).populate('user') //Populate based on field name in schema
       .then(blogs => {
@@ -23,22 +22,24 @@ blogsRouter.get('/',  async (request, response) => {
     
     try{
     const tokenDecoded = jwt.verify(request.token, process.env.SECRET)
-    console.log(tokenDecoded + 'here')
     const userID = await User.findById(tokenDecoded.id)
   
-    console.log(userID)
-
+    
+   
     const blog = new Blog({
       title: body.title,
       author: body.author,
       url: body.url,
+      content: body.content,
       likes: body.likes,
       user: userID})
+
   
     await blog
       .save()
       .then(result => {
-        response.status(201).json(result)
+        response.status(201).json(result)    
+        
       }) 
     
     } catch(err){
@@ -115,6 +116,7 @@ blogsRouter.get('/',  async (request, response) => {
 
       title : body.title,
       author : body.author,
+      content : body.content,
       url : body.url,
       likes: body.likes
 

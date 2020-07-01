@@ -16,6 +16,7 @@ const blogSchema = mongoose.Schema({
     title: String,
     author: String,
     url: String,
+    content: String,
     likes: Number,
     user :{
       type: mongoose.Schema.Types.ObjectId,
