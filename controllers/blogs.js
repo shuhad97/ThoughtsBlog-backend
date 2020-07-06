@@ -51,7 +51,7 @@ blogsRouter.get('/',  async (request, response) => {
 
   })
 
-  blogsRouter.post('/user', async (request, response, next)=>{
+  blogsRouter.post('/createUser', async (request, response, next)=>{
 
     const body = request.body
     const username = body.username
