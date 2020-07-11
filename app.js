@@ -5,6 +5,7 @@ const app = express()
 const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const loginRouter = require('./controllers/login')
+const registerRouter = require('./controllers/register')
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
@@ -21,6 +22,7 @@ app.use(express.json())
 
 app.use('/api/blogs', blogsRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/register', registerRouter)
 
 
 

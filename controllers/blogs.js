@@ -51,43 +51,7 @@ blogsRouter.get('/',  async (request, response) => {
 
   })
 
-  blogsRouter.post('/createUser', async (request, response, next)=>{
-
-    const body = request.body
-    const username = body.username
-    const name = body.name
-    const password = body.password
-
-    if(password.length <3){
-
-      response.status(400).send("Error: Increase password length")
-      return next()
-    }
-
-
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(password, saltRounds)
-
-
-    const user = User({
-
-      username,
-      name,
-      passwordHash,
-
-
-    })
-
-     await user.save()
-    
-    User.find({}).then((results)=>{
-
-      response.json(results)
-
-    })
-
-
-  })
+  
 
   blogsRouter.delete('/:id', async (request, response)=>{
 
