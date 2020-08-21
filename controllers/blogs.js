@@ -25,20 +25,21 @@ blogsRouter.get('/',  async (request, response) => {
     const userID = await User.findById(tokenDecoded.id)
   
     
-   
+   //Initialise the blog content for the database
     const blog = new Blog({
       title: body.title,
       author: body.author,
       url: body.url,
       content: body.content,
-      likes: body.likes,
+      likes: 0,
       user: userID})
 
   
     await blog
       .save()
       .then(result => {
-        response.status(201).json(result)    
+        
+        return response.status(201).json(result)    
         
       }) 
     
