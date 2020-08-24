@@ -53,7 +53,7 @@ blogsRouter.get('/',  async (request, response) => {
   })
 
   
-
+  //Delete blog post based on given ID
   blogsRouter.delete('/:id', async (request, response)=>{
 
     const id = request.params.id
@@ -71,6 +71,7 @@ blogsRouter.get('/',  async (request, response) => {
 
   })
 
+  //Update a blogpost endpoint
   blogsRouter.put('/:id', async(request, response) =>{
 
 
