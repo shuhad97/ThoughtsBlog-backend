@@ -1,6 +1,7 @@
 const registerRouter = require('express').Router()
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const e = require('express')
 
 
 
@@ -13,7 +14,9 @@ registerRouter.post('/', async (request, response, next) => {
 
     if (password.length < 3) {
 
-        response.status(400).send("Error: Increase password length")
+        response.json({
+            "success" : false,
+            "message" : "Error: Increase password length"})
         return next()
     }
 
@@ -31,14 +34,22 @@ registerRouter.post('/', async (request, response, next) => {
 
     })
 
+   
+    if(await userExistsCheck(username)){
+        response.json({
+            "success" : false,
+            "message" : "Error: Username exists"})
+        return next()
+    }
+    
+
     await user.save()
 
     User.find({}).then((results) => {
-        console.log('here')
-
+        //console.log(results)
         response.status(200).json({"success" :true})
 
-         //Successful login
+         //Successful registration
 
     }).catch((error) => {
       
@@ -48,6 +59,39 @@ registerRouter.post('/', async (request, response, next) => {
 
 
 })
+
+
+const userExistsCheck = async (username) =>{
+    //Checks if user exists in mongodb
+
+     const data = await User.find({
+
+        username,
+            
+    }).then((results) =>{
+        console.log(results + '  results')
+        
+        return results
+            
+
+    })
+   
+
+    if(data.length){
+
+       
+        return true
+
+    } else{
+ 
+        return false
+
+    }
+
+  
+
+}
+
 
 
 module.exports = registerRouter
