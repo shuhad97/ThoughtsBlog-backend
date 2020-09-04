@@ -11,6 +11,6 @@ Just a simple reactive blog using: Node, Express, MongoDB & React.
 - Login & Registration
 - Single page blogging
 - Like button
-- Some material UI (Still working on it)
-- Ugly UI time being, still experimenting
+- Some material UI usage
+- Material inspired
 
